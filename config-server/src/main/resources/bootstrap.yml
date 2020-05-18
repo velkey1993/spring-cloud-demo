@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native,vault
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: classpath:/config-repo
+        vault:
+          host: 127.0.0.1
+          authentication: TOKEN
+          token: spring-microservices-course

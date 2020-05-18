@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: caller-service
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: config-server
+#      uri: http://localhost:8080
+    consul:
+      host: 127.0.0.1
+      config:
+        format: YAML
+      discovery:
+        instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  instance:
+    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 3
